@@ -44,3 +44,8 @@
     - [ ] A High-Score list that is persistent between sessions
     - [ ] A main menu with (at least) the alternatives “New Game”, “High score” and “Quit”
     - [ ] Use sound effect and/or music in the game
+
+# notes
+spawn enemies only on some beats
+player bullets deal more damage the closer they are to beat
+3d from a "45" degree angle
