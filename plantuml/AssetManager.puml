@@ -1,0 +1,9 @@
+@startuml
+class AssetManager {
+    + AssetManager()
+    + {static} LoadTexture(filename:string) : Texture
+    + {static} LoadFont(filename:string) : Font
+    + {static} LoadMusic(filename:string) : Music
+    + {static} LoadSoundBuffer(filename:string) : SoundBuffer
+}
+@enduml

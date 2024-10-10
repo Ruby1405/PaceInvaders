@@ -1,0 +1,14 @@
+@startuml
+enum UserActions {
+    MOVE_RIGHT,
+    MOVE_LEFT,
+    MOVE_UP,
+    MOVE_DOWN,
+    SHOOT,
+    PAUSE,
+}
+class InputManager {
+    + InputManager(window:RenderWindow)
+    + {static} GetKey(action:UserActions) : Keyboard.Key
+}
+@enduml

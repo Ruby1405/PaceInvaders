@@ -1,0 +1,9 @@
+@startuml
+class Scene {
+    + Scene(window:RenderWindow)
+    + Spawn(entity:Entity) : void
+    + Update(deltaTime:float) : void
+}
+Scene --> "Inputs" InputManager
+Scene --> "Assets" AssetManager
+@enduml

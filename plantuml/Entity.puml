@@ -1,0 +1,8 @@
+@startuml
+class Entity {
+    + Entity(textureName:string)
+    + Create() : void
+    + Move(deltaTime:float) : void
+    + Update(deltaTime:float) : void
+}
+@enduml

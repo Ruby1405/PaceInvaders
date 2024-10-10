@@ -1,0 +1,5 @@
+@startuml
+class GUI {
+    + GUI()
+}
+@enduml
