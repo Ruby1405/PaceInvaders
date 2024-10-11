@@ -1,6 +1,16 @@
 @startuml
-class Player {
+class Player <<sealed>> {
+    - {static} STEERING_FORCE : float
+    - {static} MAX_SPEED : float
+    - {static} MAX_GRACE : float
+    - grace : float
     + Player()
+    + <<override>> Move(scene:Scene, deltaTime:float) : void
+    + <<override>> Update(scene:Scene, deltaTime:float) : void
 }
-Entity <|-- Player
+Entity <|-- "1" Player
+InputManager <--- Player
+UserActions <--- Player
+Player -> Helpers
+EventManager <--- Player
 @enduml

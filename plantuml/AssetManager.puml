@@ -1,6 +1,10 @@
 @startuml
-class AssetManager {
-    + AssetManager()
+class AssetManager <<static>> {
+    - {static} ASSET_PATH : string
+    - {static} textures : Dictionary<string, Texture> {readOnly}
+    - {static} fonts : Dictionary<string, Font> {readOnly}
+    - {static} musics : Dictionary<string, Music> {readOnly}
+    - {static} soundBuffers : Dictionary<string, SoundBuffer> {readOnly}
     + {static} LoadTexture(filename:string) : Texture
     + {static} LoadFont(filename:string) : Font
     + {static} LoadMusic(filename:string) : Music

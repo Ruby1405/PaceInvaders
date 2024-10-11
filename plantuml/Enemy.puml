@@ -1,6 +1,11 @@
 @startuml
-class Enemy {
+class Enemy <<sealed>> {
+    - health : float
+    - {static} rng : Random
     + Enemy()
+    + <<override>> Create() : void
+    + <<override>> Update(scene:Scene, deltaTime:float) : void
 }
-Entity <|-- Enemy
+Entity <|-- "0..*" Enemy
+EventManager <--- Enemy
 @enduml

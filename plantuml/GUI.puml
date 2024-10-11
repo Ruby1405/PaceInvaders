@@ -1,5 +1,12 @@
 @startuml
 class GUI {
+    - menuSelection : int
+    - score : int
+    - health : int
     + GUI()
+    + Update(scene:Scene) : void
+    + Render(window:RenderWindow) : void
 }
+GUI -> InputManager
+GUI -> EventManager
 @enduml

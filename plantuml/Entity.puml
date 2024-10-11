@@ -1,8 +1,13 @@
 @startuml
-class Entity {
+abstract class Entity {
+    - textureName : string
+    # sprite : Sprite
+    # Velocity : Vector2f
     + Entity(textureName:string)
-    + Create() : void
-    + Move(deltaTime:float) : void
-    + Update(deltaTime:float) : void
+    + <<virtual>> Create() : void
+    + <<virtual>> Move(scene:Scene, deltaTime:float) : void
+    + <<abstract>> Update(deltaTime:float) : void
+    + Render(window:RenderWindow) : void
 }
+AssetManager::LoadTexture <- Entity::Create
 @enduml

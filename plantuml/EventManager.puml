@@ -1,2 +1,10 @@
 @startuml
+class EventManager <<static>> {
+    + {static} FireBullet : DamageEvent?
+    + {static} LooseHealth : DamageEvent?
+    + {static} EnemyKilled : ScoreEvent?
+    + {static} PublishFireBullet(float damage) : void
+    + {static} PublishLooseHealth(float damage) : void
+    + {static} PublishEnemyKilled() : void
+}
 @enduml

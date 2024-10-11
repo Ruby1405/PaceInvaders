@@ -1,10 +1,8 @@
 @startuml
-class Bullet <<sealed>> {
-    - damage : float
-    - good : bool
-    + Bullet()
+class Beat <<sealed>> {
+    + Beat()
     + <<override>> Create() : void
     + <<override>> Update(scene:Scene, deltaTime:float) : void
 }
-Entity <|-- "0..*" Bullet
+Entity <|-- "0..*" Beat
 @enduml

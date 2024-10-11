@@ -1,9 +1,28 @@
 @startuml
+enum State {
+    MENU,
+    PLAY,
+    PAUSE,
+    GAME_OVER,
+}
 class Scene {
+    - entities : Entity[]
+    - state : State
+    + Rythm : RythmManager {readOnly}
+    - gui : GUI {readOnly}
     + Scene(window:RenderWindow)
     + Spawn(entity:Entity) : void
-    + Update(deltaTime:float) : void
+    + Update(scene:Scene, deltaTime:float) : void
+    + Render(window:RenderWindow) : void
 }
-Scene --> "Inputs" InputManager
-Scene --> "Assets" AssetManager
+State <--* "1" Scene
+GUI "1" -* "1" Scene
+Scene "1" *-- "0..*" Entity
+Scene::Scene -> InputManager::InitializeInputs
+Scene::Update -> InputManager::Update
+GUI::Update <- Scene::Update
+GUI::Render <- Scene::Render
+Scene "1" *-- "1" RythmManager
+Scene::Update --> RythmManager::Update
+Scene -> EventManager
 @enduml

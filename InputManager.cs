@@ -3,7 +3,7 @@ using SFML.Graphics;
 using SFML.Window;
 
 namespace PaceInvaders;
-enum UserActions {
+public enum UserActions {
     MOVE_RIGHT,
     MOVE_LEFT,
     MOVE_UP,
@@ -11,15 +11,11 @@ enum UserActions {
     SHOOT,
     PAUSE
 }
-class InputManager {
+public static class InputManager {
     private const string KEYBINDINGS_PATH = "Config/KeyBindings.json";
-    public static bool[] inputActions = new bool[6];
-    private static Keyboard.Key[]? inputKeys;
-    public InputManager(RenderWindow window) {
-        if (File.Exists(KEYBINDINGS_PATH)) inputKeys = LoadKeyBindings();
-        if (inputKeys == null)
-        {
-            inputKeys = [
+    public static bool[] ActiveInputs { get; private set; } = new bool[Enum.GetValues(typeof(UserActions)).Length];
+    public static bool[] InstantInputs { get; private set; } = new bool[Enum.GetValues(typeof(UserActions)).Length];
+    private static Keyboard.Key[] inputKeys = [
                 Keyboard.Key.Right, // MOVE_RIGHT
                 Keyboard.Key.Left, // MOVE_LEFT
                 Keyboard.Key.Up, // MOVE_UP
@@ -27,21 +23,30 @@ class InputManager {
                 Keyboard.Key.Space, // SHOOT
                 Keyboard.Key.Escape // PAUSE
             ];
-        }
+    public static void InitializeInputs(RenderWindow window) {
+        if (File.Exists(KEYBINDINGS_PATH)) inputKeys = LoadKeyBindings() ?? inputKeys;
 
         // Set up the event handlers
         window.KeyPressed += (sender, e) => {
             for (int i = 0; i < inputKeys.Length; i++)
             {
-                if (e.Code == inputKeys[i]) inputActions[i] = true;
+                if (e.Code == inputKeys[i])
+                {
+                    InstantInputs[i] = true;
+                    ActiveInputs[i] = true;
+                }
             }
         };
+
         window.KeyReleased += (sender, e) => {
             for (int i = 0; i < inputKeys.Length; i++)
             {
-                if (e.Code == inputKeys[i]) inputActions[i] = false;
+                if (e.Code == inputKeys[i]) ActiveInputs[i] = false;
             }
         };
+    }
+    public static void Update() {
+        for (int i = 0; i < InstantInputs.Length; i++) InstantInputs[i] = false;
     }
     public static Keyboard.Key? GetKey(UserActions action) {
         if (inputKeys == null) return null;

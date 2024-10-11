@@ -1,0 +1,6 @@
+@startuml
+class Helpers <<static>> {
+    + {static} Length(v:Vector2f) : float
+    + {static} Normalize(v:Vector2f) : Vector2f
+}
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class RythmManager {
+    + RythmManager()
+    + Update(scene:Scene) : void
+}
+InputManager <-- RythmManager
+UserActions <-- RythmManager
+EventManager <-- RythmManager::Update
+@enduml

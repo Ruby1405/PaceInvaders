@@ -1,15 +1,17 @@
-@startuml PaceInvadersDiagram
+@startuml
 !include .\\AssetManager.puml
+!include .\\Beat.puml
 !include .\\Bullet.puml
 !include .\\Enemy.puml
 !include .\\Entity.puml
 !include .\\EventManager.puml
 !include .\\GUI.puml
+!include .\\Helpers.puml
 !include .\\InputManager.puml
 !include .\\Player.puml
 !include .\\Program.puml
+!include .\\RythmManager.puml
 !include .\\Scene.puml
-!include .\\ScoundManager.puml
 !include .\\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.puml
 !include .\\obj\Debug\net8.0\PaceInvaders.AssemblyInfo.puml
 !include .\\obj\Debug\net8.0\PaceInvaders.GlobalUsings.g.puml

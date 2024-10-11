@@ -10,5 +10,20 @@ class Program {
         
         Clock clock = new();
         Scene scene = new(window);
+
+        while (window.IsOpen)
+        {
+            window.DispatchEvents();
+            float deltaTime = clock.Restart().AsSeconds();
+
+            // Update
+            scene.Update(deltaTime);
+
+            // Draw
+            window.Clear(Color.Black);
+            scene.Render(window);
+
+            window.Display();
+        }
     }
 }
