@@ -23,6 +23,7 @@ public static class InputManager {
                 Keyboard.Key.Space, // SHOOT
                 Keyboard.Key.Escape // PAUSE
             ];
+    private static string inputString = "";
     public static void InitializeInputs(RenderWindow window) {
         if (File.Exists(KEYBINDINGS_PATH)) inputKeys = LoadKeyBindings() ?? inputKeys;
 
@@ -52,8 +53,18 @@ public static class InputManager {
         if (inputKeys == null) return null;
         return inputKeys[(int)action];
     }
-    private static void SaveKeyBindings(Keyboard.Key[] a) => 
-        File.WriteAllText(KEYBINDINGS_PATH, JsonSerializer.Serialize(a));
+    private static void RecordKeyToString(object? _, KeyEventArgs e) =>
+        inputString += e.Code.ToString();
+    public static void StartStringInput(RenderWindow window) => 
+        window.KeyPressed += RecordKeyToString;
+    public static void EndStringInput(RenderWindow window)
+    {
+        window.KeyPressed -= RecordKeyToString;
+        inputString = "";
+    }
+    public static string GetInputString() => inputString;
+    private static void SaveKeyBindings(Keyboard.Key[] bindings) => 
+        File.WriteAllText(KEYBINDINGS_PATH, JsonSerializer.Serialize(bindings));
     private static Keyboard.Key[]? LoadKeyBindings() =>
         JsonSerializer.Deserialize<Keyboard.Key[]>(File.ReadAllText(KEYBINDINGS_PATH));
 }

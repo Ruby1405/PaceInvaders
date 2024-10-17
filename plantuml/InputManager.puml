@@ -14,6 +14,12 @@ class InputManager <<static>> {
     + {static} InitializeInputs(window:RenderWindow) : void
     + {static} Update() : void
     + {static} GetKey(action:UserActions) : Keyboard.Key?
+    - {static} RecordKeyToString(e: KeyEventArgs) : void
+    + {static} StartStringInput(window: RenderWindow) : void
+    + {static} EndStringInput(window: RenderWindow) : void
+    + {static} GetInputString() : string
+    - {static} SaveKeyBindings(bindings: Keyboard.Key[]) : void
+    - {static} LoadKeyBindings() : Keyboard.Key[]?
 }
 InputManager "1" *-> UserActions
 @enduml
