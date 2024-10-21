@@ -1,7 +1,7 @@
 - [ ] Player ship
     - [x] Can be moved by player, up, down, left and right
     - [x] Can't go outside the screen
-    - [ ] Player can shoot bullets (2 at a time)
+    - [x] Player can shoot bullets (2 at a time)
     - [ ] Takes damage by colliding with enemy bullets or enemy ships
     - [ ] Doesn't take damage by colliding with own bullets
     - [ ] Is immortal for a short time after taking damage
@@ -27,16 +27,16 @@
 - [ ] Health
     - [ ] Players health is displayed on screen
     - [ ] Player loses health when taking damage
-    - [ ] When health == 0, the game is lost. (You shouldn’t need to restart the game executable to play again.)
+    - [ ] When health == 0, the game is lost. (You shouldn't need to restart the game executable to play again.)
 - [ ] Graphics
     - [ ] All of the above game elements have a functional graphical representation
     - [ ] Both textures and Fonts are used
-- [ ] Optimization
-    - [ ] The player should theoretically be able to play “forever” without the game breaking
+- [x] Optimization
+    - [x] The player should theoretically be able to play “forever” without the game breaking
             hint: clear bullets from memory when they exit the screen
 - [ ] Code
     - [ ] Should be structured appropriately and follow Object Oriented principles with reasonable coupling and cohesion
-    - [ ] Shouldn’t have unnecessary repetition of code, or code that isn’t used
+    - [ ] Shouldn't have unnecessary repetition of code, or code that isn't used
     - [ ] Should be clear and well-structured enough to understand for another programmer, in regards to both readability and usability
     - [ ] It should be sufficiently easy to add new features or make changes to existing ones, as well as reuse different parts for other games
 - [ ] Bonus Features (for grade VG)

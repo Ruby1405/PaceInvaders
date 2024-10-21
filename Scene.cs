@@ -33,7 +33,7 @@ public sealed class Scene
         if (source is Player)
         {
             Player p = source as Player;
-            foreach (Vector2f gun in p.guns)
+            foreach (Vector2f gun in p.Guns)
             {
                 Bullet bullet = new Bullet();
                 bullet.damage = damage;
@@ -45,17 +45,22 @@ public sealed class Scene
     }
 
     public void Update(float deltaTime) {
-        Rythm.Update(this);
         switch (state)
         {
             case State.PLAY:
                 Rythm.Update(this);
                 foreach (Entity entity in entities) entity.Move(this, deltaTime);
                 foreach (Entity entity in entities) entity.Update(this, deltaTime);
+                for (int i = 0; i < entities.Count;)
+                {
+                    if (entities[i].Dead) entities.RemoveAt(i);
+                    else i++;
+                }
                 break;
         }
         gui.Update(this);
         InputManager.Update();
+        Console.Write(entities.Count + " ");
     }
 
     public void Render(RenderWindow window) {
@@ -63,7 +68,6 @@ public sealed class Scene
         {
             case State.PLAY:
             case State.PAUSE:
-                foreach (Entity entity in entities) entity.Render(window);
                 foreach (Entity entity in entities) entity.Render(window);
                 break;
         }

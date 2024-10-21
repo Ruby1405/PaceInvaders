@@ -8,19 +8,34 @@ sealed class Player : Entity {
     private const float MAX_SPEED = 200;
     private const float MAX_GRACE = 100;
     private float grace = 0;
-    public readonly Vector2f[] guns;
+    private Vector2f[] guns;
+    public Vector2f[] Guns {
+        get {
+            Vector2f[] arr = new Vector2f[guns.Length];
+            for (int i = 0; i < guns.Length; i++)
+            {
+                arr[i] = Position + guns[i];
+            }
+            return arr;
+        }
+    }
     public Player() : base("player")
     {
-        guns = new[]
-        {
+        sprite.FillColor = Color.Green;
+        guns = [
             new Vector2f(-10, -5),
             new Vector2f(10, -5)
-        };
+        ];
     }
     public override void Create()
     {
         base.Create();
         EventManager.StruckBeat += OnStruckBeat;
+    }
+    public override void Destroy()
+    {
+        base.Destroy();
+        EventManager.StruckBeat -= OnStruckBeat;
     }
     private void OnStruckBeat(float damage) => EventManager.PublishFireBullet(this, damage);
     public override void Move(Scene scene, float deltaTime)
@@ -49,6 +64,6 @@ sealed class Player : Entity {
         if (grace > 0) grace -= deltaTime;
 
         // if collided with enemy or enemy bullet
-        EventManager.PublishLooseHealth(10);
+        // EventManager.PublishLooseHealth(10);
     }
 }
