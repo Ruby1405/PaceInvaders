@@ -1,9 +1,10 @@
 namespace PaceInvaders;
 
 sealed class Bullet : Entity {
-    private float damage = 10;
+    public float damage = 10;
     private bool good = true;
-    public Bullet() : base("bullet") {
+    public Bullet() : base("bullet")
+    {
     }
 
     public override void Create()

@@ -1,6 +1,6 @@
 - [ ] Player ship
-    - [ ] Can be moved by player, up, down, left and right
-    - [ ] Can't go outside the screen
+    - [x] Can be moved by player, up, down, left and right
+    - [x] Can't go outside the screen
     - [ ] Player can shoot bullets (2 at a time)
     - [ ] Takes damage by colliding with enemy bullets or enemy ships
     - [ ] Doesn't take damage by colliding with own bullets
@@ -9,7 +9,7 @@
     - [ ] Moves diagonally down, "bouncing" on the edges of the screen
     - [ ] Shoots bullets randomly, but not every frame
     - [ ] Takes damage by colliding with player bullets or player ship
-    - [ ] Doesn’t take damage by colliding with enemy bullets
+    - [ ] Doesn't take damage by colliding with enemy bullets
     - [ ] Spawns at a random position, but always fully outside the screen at the top (not too far away)
     - [ ] If it exits the bottom of the screen, it moves back up, making it even more difficult
     - [ ] As time goes by, new enemies are spawned faster and faster, but never fast enough to become impossible (There are different approaches to this, pick one that you can argue makes the game fun)

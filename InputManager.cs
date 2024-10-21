@@ -16,10 +16,10 @@ public static class InputManager {
     public static bool[] ActiveInputs { get; private set; } = new bool[Enum.GetValues(typeof(UserActions)).Length];
     public static bool[] InstantInputs { get; private set; } = new bool[Enum.GetValues(typeof(UserActions)).Length];
     private static Keyboard.Key[] inputKeys = [
-                Keyboard.Key.Right, // MOVE_RIGHT
-                Keyboard.Key.Left, // MOVE_LEFT
-                Keyboard.Key.Up, // MOVE_UP
-                Keyboard.Key.Down, // MOVE_DOWN
+                Keyboard.Key.D, // MOVE_RIGHT
+                Keyboard.Key.A, // MOVE_LEFT
+                Keyboard.Key.W, // MOVE_UP
+                Keyboard.Key.S, // MOVE_DOWN
                 Keyboard.Key.Space, // SHOOT
                 Keyboard.Key.Escape // PAUSE
             ];

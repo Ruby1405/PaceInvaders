@@ -11,6 +11,10 @@ class Program {
         Clock clock = new();
         Scene scene = new(window);
 
+        Player p = new Player();
+        p.Position = new Vector2f(200, 200);
+        scene.Spawn(p);
+        
         while (window.IsOpen)
         {
             window.DispatchEvents();
