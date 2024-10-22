@@ -4,9 +4,13 @@ class Player <<sealed>> {
     - {static} MAX_SPEED : float
     - {static} MAX_GRACE : float
     - grace : float
-    + Player()
-    + <<override>> Move(scene:Scene, deltaTime:float) : void
-    + <<override>> Update(scene:Scene, deltaTime:float) : void
+    - guns : Vector2f[]
+    + {method} Guns : Vector2f[]
+    + Create() : void
+    + Destroy() : void
+    - OnStruckBeat(damage : float) : void
+    + <<override>> Move(scene : Scene, deltaTime : float) : void
+    + <<override>> Update(scene : Scene, deltaTime : float) : void
 }
 Entity <|-- "1" Player
 InputManager <--- Player

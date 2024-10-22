@@ -1,6 +1,6 @@
 @startuml
 class Bullet <<sealed>> {
-    - damage : float
+    + damage : float
     - good : bool
     + Bullet()
     + <<override>> Create() : void

@@ -1,0 +1,13 @@
+@startuml
+annotation example1 {
+
+}
+annotation example2 {
+
+}
+example1 -|> example2 : Inheritance
+example1 o- example2 : Aggregation
+example1 *- example2 : Composition
+example1 -> example2 : Association
+example1 .|> example2 : Realization
+@enduml

@@ -5,13 +5,16 @@ enum State {
     PAUSE,
     GAME_OVER,
 }
-class Scene {
+class Scene <<sealed>> {
+    + {static} WIDTH : int
+    + {static} HEIGHT : int
     - entities : Entity[]
     - state : State
     + Rythm : RythmManager {readOnly}
     - gui : GUI {readOnly}
     + Scene(window:RenderWindow)
     + Spawn(entity:Entity) : void
+    - OnFireBullet(source : Entity, damage : float) : void
     + Update(scene:Scene, deltaTime:float) : void
     + Render(window:RenderWindow) : void
 }

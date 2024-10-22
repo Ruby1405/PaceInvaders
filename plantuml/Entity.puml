@@ -2,9 +2,13 @@
 abstract class Entity {
     - textureName : string
     # sprite : Sprite
-    # Velocity : Vector2f
+    + velocity : Vector2f
     + Entity(textureName:string)
+    + {method}Dead : bool
+    + {method} Position : Vector2f
+    + {method} <<virtual>> Bounds : FloatRect {readOnly}
     + <<virtual>> Create() : void
+    + <<virtual>> Destroy() : void
     + <<virtual>> Move(scene:Scene, deltaTime:float) : void
     + <<abstract>> Update(deltaTime:float) : void
     + Render(window:RenderWindow) : void

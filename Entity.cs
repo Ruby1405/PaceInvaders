@@ -32,7 +32,7 @@ public abstract class Entity {
     public virtual void Move(Scene scene, float deltaTime) =>
         sprite.Position += velocity * deltaTime;
     public abstract void Update(Scene scene, float deltaTime);
-    public virtual void Render(RenderWindow window) {
+    public void Render(RenderWindow window) {
         window.Draw(sprite);
     }
 }

@@ -1,5 +1,5 @@
 @startuml
-class RythmManager {
+class RythmManager <<sealed>> {
     + RythmManager()
     + Update(scene:Scene) : void
 }
