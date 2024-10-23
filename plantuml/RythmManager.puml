@@ -1,9 +1,10 @@
 @startuml
 class RythmManager <<sealed>> {
-    + RythmManager()
-    + Update(scene:Scene) : void
+    - songTime : Clock
+    - {static} MAX_BEAT_TIME : float
+    + Update(deltaTime : float) : void
 }
 InputManager <-- RythmManager
 UserActions <-- RythmManager
-EventManager <-- RythmManager::Update
+EventManager <-- RythmManager
 @enduml

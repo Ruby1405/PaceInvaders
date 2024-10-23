@@ -2,7 +2,7 @@ using SFML.Graphics;
 using SFML.System;
 
 namespace PaceInvaders;
-class GUI {
+sealed class GUI {
     private int menuSelection = 0;
     private readonly Font font;
     private readonly Text ui;

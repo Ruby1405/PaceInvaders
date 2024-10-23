@@ -1,6 +1,7 @@
 @startuml
 class Helpers <<static>> {
-    + {static} Length(v:Vector2f) : float
-    + {static} Normalize(v:Vector2f) : Vector2f
+    + {static} Length(v : Vector2f) : float
+    + {static} Normalize(v : Vector2f) : Vector2f
+    + {static} HadamardProduct(a : Vector2f, b : Vector2f) : Vector2f
 }
 @enduml

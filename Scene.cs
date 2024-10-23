@@ -13,7 +13,7 @@ public sealed class Scene
     public const int WIDTH = 828;
     public const int HEIGHT = 900;
     private readonly GUI gui = new();
-    public readonly RythmManager Rythm = new();
+    public readonly RythmManager rythm = new();
     private const float SCORE_TIME = 1f;
     private static float scoreTimer = SCORE_TIME;
     public static State State { get; private set; }
@@ -96,7 +96,7 @@ public sealed class Scene
         switch (State)
         {
             case State.PLAY:
-                Rythm.Update(deltaTime);
+                rythm.Update(deltaTime);
                 foreach (Entity entity in Entities) entity.Move(deltaTime);
                 foreach (Entity entity in Entities) entity.Update(deltaTime);
                 for (int i = 0; i < Entities.Count;)

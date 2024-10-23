@@ -9,12 +9,12 @@ class Player <<sealed>> {
     + Create() : void
     + Destroy() : void
     - OnStruckBeat(damage : float) : void
-    + <<override>> Move(scene : Scene, deltaTime : float) : void
-    + <<override>> Update(scene : Scene, deltaTime : float) : void
+    + <<override>> Move(deltaTime : float) : void
+    + <<override>> Update(deltaTime : float) : void
 }
-Entity <|-- "1" Player
+Entity <|-- Player
 InputManager <--- Player
 UserActions <--- Player
-Player -> Helpers
+Helpers <-- Player
 EventManager <--- Player
 @enduml

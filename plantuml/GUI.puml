@@ -1,12 +1,12 @@
 @startuml
-class GUI {
+class GUI <<sealed>> {
     - menuSelection : int
-    - score : int
-    - health : int
-    + GUI()
-    + Update(scene:Scene) : void
+    - font : Font {readOnly}
+    - ui : Text {readOnly}
+    + Update() : void
     + Render(window:RenderWindow) : void
 }
 GUI -> InputManager
 GUI -> EventManager
+GUI -> Scene
 @enduml

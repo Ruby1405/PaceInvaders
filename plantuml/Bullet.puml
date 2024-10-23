@@ -1,10 +1,13 @@
 @startuml
 class Bullet <<sealed>> {
-    + damage : float
-    - good : bool
-    + Bullet()
+    + damage : float {readOnly}
+    + good : bool {readOnly}
+    - {static} SPEED : float
+    + Bullet(good : bool, damage : float)
+    + {method} Velocity : Vector2f
     + <<override>> Create() : void
-    + <<override>> Update(scene:Scene, deltaTime:float) : void
+    + <<override>> Update(deltaTime:float) : void
 }
-Entity <|-- "0..*" Bullet
+Entity <|-- Bullet
+Scene <--- Bullet
 @enduml

@@ -5,27 +5,37 @@ enum State {
     PAUSE,
     GAME_OVER,
 }
+struct Difficulty {
+    + onBeatSpawns : int
+    + {static} MAX_N_BEATS : int
+    + spawnEveryNBeats : int
+    + beatCounter : int
+}
 class Scene <<sealed>> {
     + {static} WIDTH : int
     + {static} HEIGHT : int
-    - entities : Entity[]
-    - state : State
-    + Rythm : RythmManager {readOnly}
     - gui : GUI {readOnly}
+    + rythm : RythmManager {readOnly}
+    - difficulty : Difficulty
+    - {static} SCORE_TIME : float
+    - {static} scoreTimer : float
+    + {static} {method} State : State
+    + {static} {method} Entities : List<Entity>
+    + {static} {method} Score : Int
+    + {static} {method} Health : Int
     + Scene(window:RenderWindow)
     + Spawn(entity:Entity) : void
+    - OnDecreaseHealth(health : int) : void
+    - OnBeat() : void
     - OnFireBullet(source : Entity, damage : float) : void
     + Update(scene:Scene, deltaTime:float) : void
     + Render(window:RenderWindow) : void
 }
 State <--* "1" Scene
-GUI "1" -* "1" Scene
+GUI "1" <-* "1" Scene
+Difficulty "1" --* "1" Scene
 Scene "1" *-- "0..*" Entity
-Scene::Scene -> InputManager::InitializeInputs
-Scene::Update -> InputManager::Update
-GUI::Update <- Scene::Update
-GUI::Render <- Scene::Render
-Scene "1" *-- "1" RythmManager
-Scene::Update --> RythmManager::Update
+Scene -> InputManager
+Scene "1" *--> "1" RythmManager
 Scene -> EventManager
 @enduml

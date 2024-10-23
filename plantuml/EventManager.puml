@@ -1,12 +1,12 @@
 @startuml
 class EventManager <<static>> {
     + {static} FireBullet : BulletEvent
-    + {static} LooseHealth : DamageEvent
     + {static} StruckBeat : DamageEvent
-    + {static} EnemyKilled : ScoreEvent
+    + {static} Beat : Action
+    + {static} DecreaseHealth : HealthEvent
     + {static} PublishFireBullet(source : Entity, damage : float) : void
-    + {static} PublishLooseHealth(damage : float) : void
     + {static} PublishStruckBeat(damage : float) : void
-    + {static} PublishEnemyKilled() : void
+    + {static} PublishBeat() : void
+    + {static} PublishDecreaseHealth(damage : int) : void
 }
 @enduml

@@ -2,5 +2,5 @@
 class Program {
     + {static} Main() : void
 }
-Program --> Scene
+Program "1" *-- "1" Scene
 @enduml

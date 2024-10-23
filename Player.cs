@@ -54,22 +54,22 @@ sealed class Player : Entity {
         if (Bounds.Left < 0)
         {
             Position = new Vector2f(sprite.Origin.X, Position.Y);
-            velocity = velocity.HadamardProduct(new Vector2f(-0.5f,1));
+            velocity = Helpers.HadamardProduct(velocity, new Vector2f(-0.5f,1));
         }
         if (Bounds.Top < 0)
         {
             Position = new Vector2f(Position.X, sprite.Origin.Y);
-            velocity = velocity.HadamardProduct(new Vector2f(1,-0.5f));
+            velocity = Helpers.HadamardProduct(velocity, new Vector2f(1,-0.5f));
         }
         if (Bounds.Left + Bounds.Width > Scene.WIDTH)
         {
             Position = new Vector2f(Scene.WIDTH - sprite.Origin.X, Position.Y);
-            velocity = velocity.HadamardProduct(new Vector2f(-0.5f,1));
+            velocity = Helpers.HadamardProduct(velocity, new Vector2f(-0.5f,1));
         }
         if (Bounds.Top + Bounds.Height > Scene.HEIGHT)
         {
             Position = new Vector2f(Position.X, Scene.HEIGHT - sprite.Origin.Y);
-            velocity = velocity.HadamardProduct(new Vector2f(1,-0.5f));
+            velocity = Helpers.HadamardProduct(velocity, new Vector2f(1,-0.5f));
         }
     }
 
