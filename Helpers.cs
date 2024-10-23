@@ -20,12 +20,22 @@ public static class Helpers {
         if (v.X == 0 && v.Y == 0) return new Vector2f(0, 0);
         return v / v.Length();
     }
-
     /// <summary>
-    /// Returns the normalized vector
+    /// Multiplies a vector with another through Hadamard Product
     /// </summary>
-    /// <param name="vector">the vector to be normalized</param>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
     /// <returns></returns>
+    public static Vector2f HadamardProduct(this Vector2f a, Vector2f b) =>
+        new Vector2f(a.X * b.X, a.Y * b.Y);
+    /// <summary>
+    /// Returns the Hadamard Product of two vectors
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    public static Vector2f Vector2fHadamardProduct(Vector2f a, Vector2f b) =>
+        new Vector2f(a.X * b.X, a.Y * b.Y);
     //public static bool PointToRectCollision(Vector2f p, FloatRect r)
     //{
     //    if (

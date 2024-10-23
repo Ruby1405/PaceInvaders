@@ -1,32 +1,32 @@
-- [ ] Player ship
+- [x] Player ship
     - [x] Can be moved by player, up, down, left and right
     - [x] Can't go outside the screen
     - [x] Player can shoot bullets (2 at a time)
-    - [ ] Takes damage by colliding with enemy bullets or enemy ships
-    - [ ] Doesn't take damage by colliding with own bullets
-    - [ ] Is immortal for a short time after taking damage
+    - [x] Takes damage by colliding with enemy bullets or enemy ships
+    - [x] Doesn't take damage by colliding with own bullets
+    - [x] Is immortal for a short time after taking damage
 - [ ] Enemy Ship
-    - [ ] Moves diagonally down, "bouncing" on the edges of the screen
-    - [ ] Shoots bullets randomly, but not every frame
-    - [ ] Takes damage by colliding with player bullets or player ship
-    - [ ] Doesn't take damage by colliding with enemy bullets
-    - [ ] Spawns at a random position, but always fully outside the screen at the top (not too far away)
-    - [ ] If it exits the bottom of the screen, it moves back up, making it even more difficult
+    - [x] Moves diagonally down, "bouncing" on the edges of the screen
+    - [x] Shoots bullets randomly, but not every frame
+    - [x] Takes damage by colliding with player bullets or player ship
+    - [x] Doesn't take damage by colliding with enemy bullets
+    - [x] Spawns at a random position, but always fully outside the screen at the top (not too far away)
+    - [x] If it exits the bottom of the screen, it moves back up, making it even more difficult
     - [ ] As time goes by, new enemies are spawned faster and faster, but never fast enough to become impossible (There are different approaches to this, pick one that you can argue makes the game fun)
-- [ ] Bullets
-    - [ ] Movement direction is based on the ship that fired it
-    - [ ] Is destroyed when colliding with a differently allied ship
-    - [ ] Both player and enemies shoot bullets of the same class
+- [x] Bullets
+    - [x] Movement direction is based on the ship that fired it
+    - [x] Is destroyed when colliding with a differently allied ship
+    - [x] Both player and enemies shoot bullets of the same class
 - [ ] Points
-    - [ ] Player gets score for each second that they stay alive
-    - [ ] Score is displayed on screen
+    - [x] Player gets score for each second that they stay alive
+    - [x] Score is displayed on screen
     - [ ] Is reset when the game is lost
 - [ ] Explosions
     - [ ] Enemy ship explodes when damaged
     - [ ] Colliding with explosions does not affect any ships or bullets
 - [ ] Health
-    - [ ] Players health is displayed on screen
-    - [ ] Player loses health when taking damage
+    - [x] Players health is displayed on screen
+    - [x] Player loses health when taking damage
     - [ ] When health == 0, the game is lost. (You shouldn't need to restart the game executable to play again.)
 - [ ] Graphics
     - [ ] All of the above game elements have a functional graphical representation

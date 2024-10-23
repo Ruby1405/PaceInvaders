@@ -1,21 +1,24 @@
 using SFML.Graphics;
+using SFML.System;
 
 namespace PaceInvaders;
 
 sealed class Bullet : Entity {
-    public float damage = 10;
-    private bool good = true;
-    public Bullet() : base("bullet") {
+    public readonly float damage;
+    public readonly bool good;
+    private const float SPEED = 400;
+    public Vector2f Velocity { get => velocity; set => velocity = value.Normalize() * SPEED; }
+    public Bullet(bool good, float damage) : base("bullet") {
         sprite.FillColor = Color.Red;
+        this.good = good;
+        this.damage = damage;
     }
     public override void Create()
     {
         base.Create();
     }
-    public override void Update(Scene scene, float deltaTime)
+    public override void Update(float deltaTime)
     {
-        // Destroy if colliding with enemy
-
         // Destroy if out of bounds
         if (Bounds.Left < -Bounds.Width ||
             Bounds.Top < -Bounds.Height ||

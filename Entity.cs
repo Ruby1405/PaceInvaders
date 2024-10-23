@@ -7,14 +7,16 @@ public abstract class Entity {
     private string textureName;
     //protected Sprite sprite;
     protected CircleShape sprite;
-    public Vector2f velocity;
+    protected Vector2f velocity;
     public bool Dead { get; private set;}
     public Entity(string textureName) {
         this.textureName = textureName;
-        //sprite = new Sprite();
-        sprite = new CircleShape(10);
-        sprite.Origin = new Vector2f(10f, 10f);
-        sprite.FillColor = Color.White;
+        //sprite = new();
+        sprite = new(10)
+        {
+            Origin = new Vector2f(10f, 10f),
+            FillColor = Color.White
+        };
         velocity = new Vector2f(0, 0);
     }
     public Vector2f Position
@@ -29,9 +31,9 @@ public abstract class Entity {
     public virtual void Destroy() {
         Dead = true;
     }
-    public virtual void Move(Scene scene, float deltaTime) =>
+    public virtual void Move(float deltaTime) =>
         sprite.Position += velocity * deltaTime;
-    public abstract void Update(Scene scene, float deltaTime);
+    public abstract void Update(float deltaTime);
     public void Render(RenderWindow window) {
         window.Draw(sprite);
     }

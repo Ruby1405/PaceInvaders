@@ -5,15 +5,11 @@ using SFML.Window;
 namespace PaceInvaders;
 class Program {
     static void Main() {
-        using var window = new RenderWindow(
+        using RenderWindow window = new(
         new VideoMode(828, 900), "Pace Invaders");
         
         Clock clock = new();
         Scene scene = new(window);
-
-        Player p = new Player();
-        p.Position = new Vector2f(200, 200);
-        scene.Spawn(p);
         
         while (window.IsOpen)
         {

@@ -6,7 +6,7 @@ sealed class Beat : Entity {
     {
         base.Create();
     }
-    public override void Update(Scene scene, float deltaTime)
+    public override void Update(float deltaTime)
     {
 
     }

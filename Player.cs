@@ -6,7 +6,7 @@ namespace PaceInvaders;
 sealed class Player : Entity {
     private const float STEERING_FORCE = 400;
     private const float MAX_SPEED = 200;
-    private const float MAX_GRACE = 100;
+    private const float MAX_GRACE = 1;
     private float grace = 0;
     private Vector2f[] guns;
     public Vector2f[] Guns {
@@ -38,7 +38,7 @@ sealed class Player : Entity {
         EventManager.StruckBeat -= OnStruckBeat;
     }
     private void OnStruckBeat(float damage) => EventManager.PublishFireBullet(this, damage);
-    public override void Move(Scene scene, float deltaTime)
+    public override void Move(float deltaTime)
     {
         Vector2f steering = new Vector2f(0,0);
         if (InputManager.ActiveInputs[(int)UserActions.MOVE_RIGHT]) steering += new Vector2f(1,0);
@@ -51,19 +51,57 @@ sealed class Player : Entity {
         if (velocity.Length() > MAX_SPEED) velocity = velocity.Normalize() * MAX_SPEED;
         Position += velocity * deltaTime;
 
-        if (Bounds.Left < 0) Position = new Vector2f(sprite.Origin.X, Position.Y);
-        if (Bounds.Top < 0) Position = new Vector2f(Position.X, sprite.Origin.Y);
+        if (Bounds.Left < 0)
+        {
+            Position = new Vector2f(sprite.Origin.X, Position.Y);
+            velocity = velocity.HadamardProduct(new Vector2f(-0.5f,1));
+        }
+        if (Bounds.Top < 0)
+        {
+            Position = new Vector2f(Position.X, sprite.Origin.Y);
+            velocity = velocity.HadamardProduct(new Vector2f(1,-0.5f));
+        }
         if (Bounds.Left + Bounds.Width > Scene.WIDTH)
+        {
             Position = new Vector2f(Scene.WIDTH - sprite.Origin.X, Position.Y);
+            velocity = velocity.HadamardProduct(new Vector2f(-0.5f,1));
+        }
         if (Bounds.Top + Bounds.Height > Scene.HEIGHT)
+        {
             Position = new Vector2f(Position.X, Scene.HEIGHT - sprite.Origin.Y);
+            velocity = velocity.HadamardProduct(new Vector2f(1,-0.5f));
+        }
     }
 
-    public override void Update(Scene scene, float deltaTime)
+    public override void Update(float deltaTime)
     {
         if (grace > 0) grace -= deltaTime;
 
-        // if collided with enemy or enemy bullet
-        // EventManager.PublishLooseHealth(10);
+        if (grace <= 0)
+        {
+            // if collided with enemy or enemy bullet
+            foreach (var bullet in Scene.Entities.OfType<Bullet>().Where(b => !b.good && !b.Dead))
+            {
+                // FIX
+                if ((bullet.Position - Position).Length() < 20)
+                {
+                    bullet.Destroy();
+                    EventManager.PublishDecreaseHealth(1);
+                    grace = MAX_GRACE;
+                    break;
+                }
+            }
+            if (grace <= 0) foreach (var enemy in Scene.Entities.OfType<Enemy>().Where(e => !e.Dead))
+            {
+                // FIX
+                if ((enemy.Position - Position).Length() < 20)
+                {
+                    enemy.Destroy();
+                    EventManager.PublishDecreaseHealth(1);
+                    grace = MAX_GRACE;
+                    break;
+                }
+            }
+        }
     }
 }
