@@ -13,7 +13,6 @@ sealed class Enemy : Entity {
     public override void Create()
     {
         base.Create();
-        //FIX
         sprite.Position = new Vector2f(rng.Next(0, 800), -20);
         velocity = new Vector2f(rng.NextSingle() -0.5f, 0.1f).Normalize() * MAX_SPEED;
 
@@ -68,8 +67,6 @@ sealed class Enemy : Entity {
                 }
             }
         }
-        // FIX
-        // FIX
         if ((Scene.Entities.Find(e => e is Player).Position - Position).Length() < 20)
         {
             Destroy();

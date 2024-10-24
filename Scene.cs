@@ -31,7 +31,6 @@ public sealed class Scene
         public int beatCounter = MAX_N_BEATS;
         public Difficulty(){}
     }
-    // FIX
     private static Difficulty difficulty;
     public Scene(RenderWindow window) {
         State = State.MENU;
@@ -114,7 +113,6 @@ public sealed class Scene
             Spawn(new Bullet(false, damage)
             {
                 Position = source.Position,
-                //FIX
                 Velocity = Entities.Find(entity => entity is Player).Position - source.Position
             });
         }
@@ -165,7 +163,6 @@ public sealed class Scene
             case State.PAUSE:
                 foreach (Entity entity in Entities) entity.Render(window);
                 break;
-            //FIX
             case State.QUIT:
                 window.Close();
                 break;
