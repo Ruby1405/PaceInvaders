@@ -8,7 +8,9 @@ sealed class Enemy : Entity {
     private const float MAX_SPEED = 100;
     private static readonly Random rng = new();
     public Vector2f Velocity => velocity;
+    private readonly CircleShape thrusterExhaust = new(2);
     public Enemy() : base("enemy") {
+        thrusterExhaust.Origin = new Vector2f(2,2);
     }
     public override void Create()
     {
@@ -49,6 +51,8 @@ sealed class Enemy : Entity {
         {
             Position = new Vector2f(Position.X, -20);
         }
+
+        thrusterExhaust.Position = sprite.Position + new Vector2f(0,16);
     }
     public override void Update(float deltaTime)
     {
@@ -65,6 +69,7 @@ sealed class Enemy : Entity {
                     EventManager.PublishExplosion(Position,velocity);
                     break;
                 }
+                sprite.Color = Color.Red;
             }
         }
         if ((Scene.Entities.Find(e => e is Player).Position - Position).Length() < 20)
@@ -72,5 +77,11 @@ sealed class Enemy : Entity {
             Destroy();
             EventManager.PublishExplosion(Position,velocity);
         }
+
+        thrusterExhaust.FillColor = rng.Next(0,2) == 1? Color.Red: Color.Yellow;
+    }
+    public override void Render(RenderWindow window){
+        window.Draw(thrusterExhaust);
+        base.Render(window);
     }
 }

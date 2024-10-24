@@ -8,6 +8,6 @@ sealed class Beat : Entity {
     }
     public override void Update(float deltaTime)
     {
-
+        
     }
 }

@@ -9,6 +9,8 @@ sealed class Player : Entity {
     private const float MAX_SPEED = 200;
     private const float MAX_GRACE = 1;
     private float grace = 0;
+    private static readonly Random rng = new();
+    private readonly CircleShape thrusterExhaust = new(2);
     private Vector2f[] guns;
     public Vector2f[] Guns {
         get {
@@ -22,7 +24,8 @@ sealed class Player : Entity {
     }
     public Player() : base("player")
     {
-        //sprite.FillColor = Color.Green;
+        thrusterExhaust.Origin = new Vector2f(2,2);
+        
         guns = [
             new Vector2f(-15, -20),
             new Vector2f(15, -20)
@@ -72,6 +75,7 @@ sealed class Player : Entity {
             Position = new Vector2f(Position.X, Scene.HEIGHT - sprite.Origin.Y);
             velocity = Helpers.HadamardProduct(velocity, new Vector2f(1,-0.5f));
         }
+        thrusterExhaust.Position = sprite.Position + new Vector2f(0,16);
     }
 
     public override void Update(float deltaTime)
@@ -100,5 +104,10 @@ sealed class Player : Entity {
             grace = MAX_GRACE;
             break;
         }
+        thrusterExhaust.FillColor = rng.Next(0,2) == 1? Color.Red: Color.Yellow;
+    }
+    public override void Render(RenderWindow window){
+        window.Draw(thrusterExhaust);
+        base.Render(window);
     }
 }

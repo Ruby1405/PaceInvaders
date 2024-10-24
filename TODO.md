@@ -5,14 +5,14 @@
     - [x] Takes damage by colliding with enemy bullets or enemy ships
     - [x] Doesn't take damage by colliding with own bullets
     - [x] Is immortal for a short time after taking damage
-- [ ] Enemy Ship
+- [x] Enemy Ship
     - [x] Moves diagonally down, "bouncing" on the edges of the screen
     - [x] Shoots bullets randomly, but not every frame
     - [x] Takes damage by colliding with player bullets or player ship
     - [x] Doesn't take damage by colliding with enemy bullets
     - [x] Spawns at a random position, but always fully outside the screen at the top (not too far away)
     - [x] If it exits the bottom of the screen, it moves back up, making it even more difficult
-    - [ ] As time goes by, new enemies are spawned faster and faster, but never fast enough to become impossible (There are different approaches to this, pick one that you can argue makes the game fun)
+    - [x] As time goes by, new enemies are spawned faster and faster, but never fast enough to become impossible (There are different approaches to this, pick one that you can argue makes the game fun)
 - [x] Bullets
     - [x] Movement direction is based on the ship that fired it
     - [x] Is destroyed when colliding with a differently allied ship
@@ -39,13 +39,25 @@
     - [x] Shouldn't have unnecessary repetition of code, or code that isn't used
     - [x] Should be clear and well-structured enough to understand for another programmer, in regards to both readability and usability
     - [x] It should be sufficiently easy to add new features or make changes to existing ones, as well as reuse different parts for other games
-- [ ] Bonus Features (for grade VG)
+- [x] Bonus Features (for grade VG)
     - [x] Let the player enter a name
     - [x] A High-Score list that is persistent between sessions
     - [x] A main menu with (at least) the alternatives “New Game”, “High score” and “Quit”
-    - [ ] Use sound effect and/or music in the game
+    - [x] Use sound effect and/or music in the game
+
+- [ ] Actual rythm features: Any of the following
+    - [x] Make enemies spawn on beats
+    - [ ] Player shots deal different damage depending on rythm
+
+- [ ] Add or remove settings
+- [x] Enemies look different when damaged
+- [ ] Background particles
+- [x] thruster exhaust
 
 # notes
 spawn enemies only on some beats
 player bullets deal more damage the closer they are to beat
 3d from a "45" degree angle
+
+Electric guitar every 8th
+100 bpm

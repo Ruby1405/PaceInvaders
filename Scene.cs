@@ -17,7 +17,7 @@ public sealed class Scene
     private const float SCORE_TIME = 1f;
     private static float scoreTimer = SCORE_TIME;
     private static readonly GUI gui = new();
-    public static readonly RythmManager rythm = new();
+    public static RythmManager rythm = new();
     private static List<Explosion> explosionBuffer = [];
     public static State State { get; set; }
     public static List<Entity> Entities { get; private set; } = [];
@@ -25,10 +25,12 @@ public sealed class Scene
     public static int Health { get; private set; }
     private struct Difficulty
     {
-        public int onBeatSpawns = 0;
-        public const int MAX_N_BEATS = 4;
-        public int spawnEveryNBeats = MAX_N_BEATS;
-        public int beatCounter = MAX_N_BEATS;
+        public const int BEAT_COUNTER_TARGET = 8;
+        public int beatCounter = 0;
+        public int rythmSpawns = 1;
+        public int MAX_SPAWNS = 20;
+        public int incrementCounterTarget = 4;
+        public int incrementCounter = 0;
         public Difficulty(){}
     }
     private static Difficulty difficulty;
@@ -40,8 +42,6 @@ public sealed class Scene
         EventManager.DecreaseHealth += OnDecreaseHealth;
         EventManager.Beat += OnBeat;
         EventManager.Explosion += OnExplosion;
-
-        NewGame();
     }
     public static void NewGame() {
         foreach (var entity in Entities)
@@ -61,6 +61,9 @@ public sealed class Scene
 
         Score = 0;
         Health = 3;
+
+        rythm = new();
+        rythm.Play();
     }
     public static void Spawn(Entity entity) {
         Entities.Add(entity);
@@ -77,22 +80,25 @@ public sealed class Scene
         }
     }
     private void OnBeat() {
-        if (difficulty.beatCounter > 0) difficulty.beatCounter --;
-        //Console.WriteLine("BEAT" + " c" + difficulty.beatCounter + " n" + difficulty.spawnEveryNBeats + " x" + difficulty.onBeatSpawns);
-        for (int i = 0; i < difficulty.onBeatSpawns; i++)
+        if (difficulty.beatCounter < Difficulty.BEAT_COUNTER_TARGET)
         {
-            Spawn(new Enemy());
+            difficulty.beatCounter ++;
+            return;
         }
-        if (difficulty.beatCounter == 0)
+        difficulty.beatCounter = 0;
+        if (difficulty.rythmSpawns < difficulty.MAX_SPAWNS)
+        {
+            if (difficulty.incrementCounter < difficulty.incrementCounterTarget) difficulty.incrementCounter ++;
+            else 
+            {
+                difficulty.incrementCounter = 0;
+                difficulty.incrementCounterTarget ++;
+                difficulty.rythmSpawns ++;
+            }
+        }
+        for (int i = 0; i < difficulty.rythmSpawns; i++)
         {
             Spawn(new Enemy());
-            difficulty.spawnEveryNBeats --;
-            if (difficulty.spawnEveryNBeats == 1)
-            {
-                difficulty.spawnEveryNBeats = Difficulty.MAX_N_BEATS;
-                difficulty.onBeatSpawns ++;
-            }
-            difficulty.beatCounter = difficulty.spawnEveryNBeats;
         }
     }
     private void OnFireBullet(Entity source, float damage)
@@ -151,6 +157,9 @@ public sealed class Scene
                     Score++;
                 }
                 else scoreTimer -= deltaTime;
+                break;
+            default:
+                rythm.Pause();
                 break;
         }
         gui.Update();

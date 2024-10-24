@@ -14,16 +14,19 @@ public static class AssetManager {
         return texture;
     }
     public static Font LoadFont(string filename) {
+        if (fonts.TryGetValue(filename, out Font found)) return found;
         Font font = new(filename);
         fonts.Add(filename, font);
         return font;
     }
     public static Music LoadMusic(string filename) {
-        Music music = new(filename);
+        if (musics.TryGetValue(filename, out Music found)) return found;
+        Music music = new(ASSET_PATH + filename);
         musics.Add(filename, music);
         return music;
     }
     public static SoundBuffer LoadSoundBuffer(string filename) {
+        if (soundBuffers.TryGetValue(filename, out SoundBuffer found)) return found;
         SoundBuffer soundBuffer = new(filename);
         soundBuffers.Add(filename, soundBuffer);
         return soundBuffer;

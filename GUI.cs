@@ -12,13 +12,11 @@ sealed class GUI {
     private static readonly string[] MENU_OPTIONS = [
         "New Game",
         "Highscores",
-        "Settings",
         "Quit"
     ];
     private static readonly string[] PAUSE_OPTIONS = [
         "Resume",
         "Highscores",
-        "Settings",
         "Main menu"
     ];
     private bool showHighScores = false;
@@ -129,7 +127,11 @@ sealed class GUI {
                     }
                 break;
             case State.PLAY:
-                if (InputManager.InstantInputs[(int)UserActions.PAUSE]) Scene.State = State.PAUSE;
+                if (InputManager.InstantInputs[(int)UserActions.PAUSE])
+                {
+                    Scene.State = State.PAUSE;
+                    
+                }
                 ui.DisplayedString = Scene.Score + "\n" + Scene.Health;
                 break;
             case State.HIGHSCORES:
@@ -176,7 +178,7 @@ sealed class GUI {
                     text.FillColor = optionSelection == i? Color.Cyan : Color.White;
                     window.Draw(text);
                     text.DisplayedString = "Select: " + InputManager.GetKey(UserActions.SHOOT) +
-                                           " / " + InputManager.GetKey(UserActions.SUBMIT);
+                        " / " + InputManager.GetKey(UserActions.SUBMIT);
                     text.FillColor = Color.Yellow;
                     text.Position = new Vector2f(50,Scene.HEIGHT - (10 + text.CharacterSize));
                     window.Draw(text);
@@ -228,7 +230,6 @@ sealed class GUI {
                 text.Position = new Vector2f(50,Scene.HEIGHT - (10 + text.CharacterSize));
                 window.Draw(text);
                 break;
-
         }
     }
 }
