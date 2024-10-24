@@ -39,6 +39,7 @@ public sealed class Scene
         EventManager.FireBullet += OnFireBullet;
         EventManager.DecreaseHealth += OnDecreaseHealth;
         EventManager.Beat += OnBeat;
+        //EventManager.Explosion += OnExplosion;
 
         NewGame();
     }
@@ -71,7 +72,7 @@ public sealed class Scene
         if (Health <= 0)
         {
             State = State.GAME_OVER;
-            InputManager.StartTextInput();
+            EventManager.PublishGameLost();
         }
     }
     private void OnBeat() {
@@ -116,6 +117,14 @@ public sealed class Scene
             });
         }
     }
+    /*private void OnExplosion(Vector2f p, Vector2f v)
+    {
+        Spawn(new Explosion()
+        {
+            Position = p,
+            Velocity = v
+        });
+    }*/
     public void Update(float deltaTime) {
         switch (State)
         {
@@ -125,7 +134,10 @@ public sealed class Scene
                 foreach (Entity entity in Entities) entity.Update(deltaTime);
                 for (int i = 0; i < Entities.Count;)
                 {
-                    if (Entities[i].Dead) Entities.RemoveAt(i);
+                    if (Entities[i].Dead)
+                    {
+                        Entities.RemoveAt(i);
+                    }
                     else i++;
                 }
                 if (scoreTimer <= 0)

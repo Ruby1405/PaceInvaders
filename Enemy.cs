@@ -47,9 +47,7 @@ sealed class Enemy : Entity {
         }
         if (Bounds.Top > Scene.HEIGHT)
         {
-            //FIX
             Position = new Vector2f(Position.X, -20);
-            sprite.FillColor = Color.Blue;
         }
     }
     public override void Update(float deltaTime)
@@ -63,9 +61,33 @@ sealed class Enemy : Entity {
             {
                 bullet.Destroy();
                 health -= bullet.damage;
-                if (health <= 0) Destroy();
+                if (health <= 0)
+                {
+                    Destroy();
+                    // Modifies entities collection
+                    //EventManager.PublishExplosion(Position,velocity);
+                    break;
+                }
             }
         }
+        /*for (int i = 0; i < Scene.Entities.Count; i++)
+        {
+            if (Scene.Entities[i] is Bullet)
+            {
+                Bullet bullet = Scene.Entities[i] as Bullet;
+                if (bullet.good && !bullet.Dead && (bullet.Position - Position).Length() < 20)
+                {
+                    bullet.Destroy();
+                    health -= bullet.damage;
+                    if (health <= 0)
+                    {
+                        Destroy();
+                        EventManager.PublishExplosion(Position,velocity);
+                        break;
+                    }
+                }
+            }
+        }*/
         // FIX
         // FIX
         if ((Scene.Entities.Find(e => e is Player).Position - Position).Length() < 20)

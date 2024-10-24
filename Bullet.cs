@@ -9,13 +9,9 @@ sealed class Bullet : Entity {
     private const float SPEED = 400;
     public Vector2f Velocity { get => velocity; set => velocity = value.Normalize() * SPEED; }
     public Bullet(bool good, float damage) : base("bullet") {
-        sprite.FillColor = Color.Red;
+        sprite.FillColor = Color.Cyan;
         this.good = good;
         this.damage = damage;
-    }
-    public override void Create()
-    {
-        base.Create();
     }
     public override void Update(float deltaTime)
     {

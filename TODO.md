@@ -17,17 +17,17 @@
     - [x] Movement direction is based on the ship that fired it
     - [x] Is destroyed when colliding with a differently allied ship
     - [x] Both player and enemies shoot bullets of the same class
-- [ ] Points
+- [x] Points
     - [x] Player gets score for each second that they stay alive
     - [x] Score is displayed on screen
-    - [ ] Is reset when the game is lost
+    - [x] Is reset when the game is lost
 - [ ] Explosions
     - [ ] Enemy ship explodes when damaged
     - [ ] Colliding with explosions does not affect any ships or bullets
-- [ ] Health
+- [x] Health
     - [x] Players health is displayed on screen
     - [x] Player loses health when taking damage
-    - [ ] When health == 0, the game is lost. (You shouldn't need to restart the game executable to play again.)
+    - [x] When health == 0, the game is lost. (You shouldn't need to restart the game executable to play again.)
 - [ ] Graphics
     - [ ] All of the above game elements have a functional graphical representation
     - [ ] Both textures and Fonts are used
@@ -41,8 +41,8 @@
     - [ ] It should be sufficiently easy to add new features or make changes to existing ones, as well as reuse different parts for other games
 - [ ] Bonus Features (for grade VG)
     - [x] Let the player enter a name
-    - [ ] A High-Score list that is persistent between sessions
-    - [ ] A main menu with (at least) the alternatives “New Game”, “High score” and “Quit”
+    - [x] A High-Score list that is persistent between sessions
+    - [x] A main menu with (at least) the alternatives “New Game”, “High score” and “Quit”
     - [ ] Use sound effect and/or music in the game
 
 # notes
