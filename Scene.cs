@@ -4,22 +4,24 @@ using SFML.System;
 namespace PaceInvaders;
 public enum State {
     MENU,
-    PLAY,
     PAUSE,
-    GAME_OVER
+    PLAY,
+    HIGHSCORES,
+    GAME_OVER,
+    QUIT
 }
 public sealed class Scene
 {
     public const int WIDTH = 828;
     public const int HEIGHT = 900;
-    private readonly GUI gui = new();
-    public readonly RythmManager rythm = new();
     private const float SCORE_TIME = 1f;
     private static float scoreTimer = SCORE_TIME;
-    public static State State { get; private set; }
+    private static readonly GUI gui = new();
+    public static readonly RythmManager rythm = new();
+    public static State State { get; set; }
     public static List<Entity> Entities { get; private set; } = [];
     public static int Score { get; private set; }
-    public static int Health { get; private set; } = 3;
+    public static int Health { get; private set; }
     private struct Difficulty
     {
         public int onBeatSpawns = 0;
@@ -29,27 +31,49 @@ public sealed class Scene
         public Difficulty(){}
     }
     // FIX
-    private Difficulty difficulty = new();
+    private static Difficulty difficulty;
     public Scene(RenderWindow window) {
-        State = State.PLAY;
+        State = State.MENU;
         InputManager.InitializeInputs(window);
 
         EventManager.FireBullet += OnFireBullet;
         EventManager.DecreaseHealth += OnDecreaseHealth;
         EventManager.Beat += OnBeat;
 
+        NewGame();
+    }
+    public static void NewGame() {
+        foreach (var entity in Entities)
+        {
+            entity.Destroy();
+        }
+        Entities.Clear();
+
         Player player = new()
         {
             Position = new Vector2f(200, 200)
         };
         Spawn(player);
+
+        difficulty = new();
+
+        Score = 0;
+        Health = 3;
     }
-    public void Spawn(Entity entity) {
+    public static void Spawn(Entity entity) {
         Entities.Add(entity);
         entity.Create();
         //Console.WriteLine($"added {entity}");
     }
-    private void OnDecreaseHealth(int health) => Health -= health;
+    private void OnDecreaseHealth(int health)
+    {
+        Health -= health;
+        if (Health <= 0)
+        {
+            State = State.GAME_OVER;
+            InputManager.StartTextInput();
+        }
+    }
     private void OnBeat() {
         if (difficulty.beatCounter > 0) difficulty.beatCounter --;
         //Console.WriteLine("BEAT" + " c" + difficulty.beatCounter + " n" + difficulty.spawnEveryNBeats + " x" + difficulty.onBeatSpawns);
@@ -121,6 +145,10 @@ public sealed class Scene
             case State.PLAY:
             case State.PAUSE:
                 foreach (Entity entity in Entities) entity.Render(window);
+                break;
+            //FIX
+            case State.QUIT:
+                window.Close();
                 break;
         }
         gui.Render(window);

@@ -40,7 +40,7 @@
     - [ ] Should be clear and well-structured enough to understand for another programmer, in regards to both readability and usability
     - [ ] It should be sufficiently easy to add new features or make changes to existing ones, as well as reuse different parts for other games
 - [ ] Bonus Features (for grade VG)
-    - [ ] Let the player enter a name
+    - [x] Let the player enter a name
     - [ ] A High-Score list that is persistent between sessions
     - [ ] A main menu with (at least) the alternatives “New Game”, “High score” and “Quit”
     - [ ] Use sound effect and/or music in the game

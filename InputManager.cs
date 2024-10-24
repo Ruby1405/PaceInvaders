@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using SFML.Graphics;
 using SFML.Window;
 
@@ -9,10 +10,12 @@ public enum UserActions {
     MOVE_UP,
     MOVE_DOWN,
     SHOOT,
-    PAUSE
+    PAUSE,
+    SUBMIT
 }
 public static class InputManager {
     private const string KEYBINDINGS_PATH = "Config/KeyBindings.json";
+    private static readonly Regex alphaNumericRegex = new("^[a-zA-Z0-9]*$");
     public static bool[] ActiveInputs { get; private set; } = new bool[Enum.GetValues(typeof(UserActions)).Length];
     public static bool[] InstantInputs { get; private set; } = new bool[Enum.GetValues(typeof(UserActions)).Length];
     private static Keyboard.Key[] inputKeys = [
@@ -21,11 +24,15 @@ public static class InputManager {
                 Keyboard.Key.W, // MOVE_UP
                 Keyboard.Key.S, // MOVE_DOWN
                 Keyboard.Key.Space, // SHOOT
-                Keyboard.Key.Escape // PAUSE
+                Keyboard.Key.Escape, // PAUSE
+                Keyboard.Key.Enter // SUBMIT
             ];
     private static string inputString = "";
-    public static void InitializeInputs(RenderWindow window) {
+    private static RenderWindow window;
+    public static void InitializeInputs(RenderWindow w) {
         if (File.Exists(KEYBINDINGS_PATH)) inputKeys = LoadKeyBindings() ?? inputKeys;
+
+        window = w;
 
         // Set up the event handlers
         window.KeyPressed += (sender, e) => {
@@ -53,15 +60,23 @@ public static class InputManager {
         if (inputKeys == null) return null;
         return inputKeys[(int)action];
     }
-    private static void RecordKeyToString(object? _, KeyEventArgs e) =>
-        inputString += e.Code.ToString();
-    public static void StartStringInput(RenderWindow window) => 
-        window.KeyPressed += RecordKeyToString;
-    public static void EndStringInput(RenderWindow window)
+    private static void RecordTextInput(object? _, TextEventArgs e)
     {
-        window.KeyPressed -= RecordKeyToString;
+        if (e.Unicode == "\b")
+        {
+            if (inputString.Length > 0)
+                inputString = inputString[..(inputString.Length - 1)];
+            return;
+        }
+        if (alphaNumericRegex.IsMatch(e.Unicode)) inputString += e.Unicode;
+    }
+    public static void StartTextInput()
+    {
+        window.TextEntered += RecordTextInput;
         inputString = "";
     }
+    public static void EndTextInput() => 
+        window.TextEntered -= RecordTextInput;
     public static string GetInputString() => inputString;
     private static void SaveKeyBindings(Keyboard.Key[] bindings) => 
         File.WriteAllText(KEYBINDINGS_PATH, JsonSerializer.Serialize(bindings));

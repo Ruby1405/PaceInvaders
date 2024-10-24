@@ -4,7 +4,7 @@ using SFML.System;
 namespace PaceInvaders;
 
 sealed class Player : Entity {
-    private const float STEERING_FORCE = 400;
+    private const float STEERING_FORCE = 500;
     private const float MAX_SPEED = 200;
     private const float MAX_GRACE = 1;
     private float grace = 0;

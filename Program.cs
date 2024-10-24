@@ -7,6 +7,7 @@ class Program {
     static void Main() {
         using RenderWindow window = new(
         new VideoMode(828, 900), "Pace Invaders");
+        window.Closed += (o, e) => window.Close();
         
         Clock clock = new();
         Scene scene = new(window);
