@@ -34,11 +34,11 @@
 - [x] Optimization
     - [x] The player should theoretically be able to play “forever” without the game breaking
             hint: clear bullets from memory when they exit the screen
-- [ ] Code
-    - [ ] Should be structured appropriately and follow Object Oriented principles with reasonable coupling and cohesion
-    - [ ] Shouldn't have unnecessary repetition of code, or code that isn't used
-    - [ ] Should be clear and well-structured enough to understand for another programmer, in regards to both readability and usability
-    - [ ] It should be sufficiently easy to add new features or make changes to existing ones, as well as reuse different parts for other games
+- [x] Code
+    - [x] Should be structured appropriately and follow Object Oriented principles with reasonable coupling and cohesion
+    - [x] Shouldn't have unnecessary repetition of code, or code that isn't used
+    - [x] Should be clear and well-structured enough to understand for another programmer, in regards to both readability and usability
+    - [x] It should be sufficiently easy to add new features or make changes to existing ones, as well as reuse different parts for other games
 - [ ] Bonus Features (for grade VG)
     - [x] Let the player enter a name
     - [x] A High-Score list that is persistent between sessions
@@ -49,6 +49,3 @@
 spawn enemies only on some beats
 player bullets deal more damage the closer they are to beat
 3d from a "45" degree angle
-
-- [ ] UI input tips
-- [ ] use submit or space
