@@ -1,7 +1,6 @@
 @startuml
 !include .\\Annotations.puml
 !include .\\AssetManager.puml
-!include .\\Beat.puml
 !include .\\Bullet.puml
 !include .\\Enemy.puml
 !include .\\Entity.puml

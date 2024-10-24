@@ -3,10 +3,14 @@ class EventManager <<static>> {
     + {static} FireBullet : BulletEvent
     + {static} StruckBeat : DamageEvent
     + {static} Beat : Action
+    + {static} Explosion : ExplosionEvent
+    + {static} GameLost : Action
     + {static} DecreaseHealth : HealthEvent
     + {static} PublishFireBullet(source : Entity, damage : float) : void
     + {static} PublishStruckBeat(damage : float) : void
     + {static} PublishBeat() : void
+    + {static} PublishExplosion(p : Vector2f,v : Vector2f) : void
+    + {static} PublishGameLost() : void
     + {static} PublishDecreaseHealth(damage : int) : void
 }
 @enduml

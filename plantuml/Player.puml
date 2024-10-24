@@ -4,6 +4,8 @@ class Player <<sealed>> {
     - {static} MAX_SPEED : float
     - {static} MAX_GRACE : float
     - grace : float
+    - {static} rng : Random {readOnly}
+    - thrusterExhaust : CircleShape {readOnly}
     - guns : Vector2f[]
     + {method} Guns : Vector2f[]
     + Create() : void
@@ -11,6 +13,7 @@ class Player <<sealed>> {
     - OnStruckBeat(damage : float) : void
     + <<override>> Move(deltaTime : float) : void
     + <<override>> Update(deltaTime : float) : void
+    + <<override>> Render(window : RenderWindow) : void
 }
 Entity <|-- Player
 InputManager <--- Player

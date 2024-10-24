@@ -3,7 +3,6 @@ using SFML.Audio;
 
 namespace PaceInvaders;
 public sealed class RythmManager {
-    private Clock songTime = new ();
     private const float MAX_BEAT_TIME = 0.6f;
     private float beatTimer = MAX_BEAT_TIME;
     private Music music;

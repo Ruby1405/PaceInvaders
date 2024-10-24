@@ -3,11 +3,14 @@ class Enemy <<sealed>> {
     - health : float
     - {static} MAX_SPEED : float
     - {static} rng : Random {readOnly}
+    - thrusterExhaust : CircleShape
+    + {method} Velocity : Vector2f
     + <<override>> Create() : void
     + <<override>> Destroy() : void
     - OnBeat() : void
     + <<override>> Move(deltaTime : float) : void
     + <<override>> Update(deltaTime : float) : void
+    + <<override>> Render(window : RenderWindow) : void
 }
 Entity <|-- Enemy
 EventManager <--- Enemy

@@ -9,16 +9,20 @@ enum UserActions {
 }
 class InputManager <<static>> {
     - {static} KEYBINDINGS_PATH : string
+    - {static} alphaNumericRegex : Regex {readOnly}
+    - {static} inputKeys : Keyboard.Key[]
+    - {static} inputString : string
+    - {static} window : RenderWindow
     + {method} {static} ActiveInputs : bool[]
     + {method} {static} InstantInputs : bool[]
     + {static} InitializeInputs(window:RenderWindow) : void
     + {static} Update() : void
     + {static} GetKey(action:UserActions) : Keyboard.Key?
-    - {static} RecordKeyToString(e: KeyEventArgs) : void
-    + {static} StartStringInput(window: RenderWindow) : void
-    + {static} EndStringInput(window: RenderWindow) : void
+    - {static} RecordTextInput(e: TextEventArgs) : void
+    + {static} StartTextInput() : void
+    + {static} EndTextInput() : void
     + {static} GetInputString() : string
-    - {static} SaveKeyBindings(bindings: Keyboard.Key[]) : void
+    - {static} SaveKeyBindings() : void
     - {static} LoadKeyBindings() : Keyboard.Key[]?
 }
 InputManager "1" *-> UserActions

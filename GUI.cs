@@ -19,7 +19,6 @@ sealed class GUI {
         "Highscores",
         "Main menu"
     ];
-    private bool showHighScores = false;
     private List<(int, string)> highScores = [];
     private const string HIGHSCORES_PATH = "Config/highscores.txt";
     private const int HIGHSCORES_DISPLAY_COUNT = 20;

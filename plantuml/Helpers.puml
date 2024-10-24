@@ -3,5 +3,7 @@ class Helpers <<static>> {
     + {static} Length(v : Vector2f) : float
     + {static} Normalize(v : Vector2f) : Vector2f
     + {static} HadamardProduct(a : Vector2f, b : Vector2f) : Vector2f
+    + {static} RectToRectCollision(a : FloatRect, b : FloatRect) : bool
+    + {static} PointToRectCollision(p : Vector2f, r : FloatRect) : bool
 }
 @enduml

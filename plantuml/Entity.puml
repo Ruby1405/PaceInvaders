@@ -11,7 +11,7 @@ abstract class Entity {
     + <<virtual>> Destroy() : void
     + <<virtual>> Move(deltaTime : float) : void
     + <<abstract>> Update(deltaTime : float) : void
-    + Render(window : RenderWindow) : void
+    + <<virtual>> Render(window : RenderWindow) : void
 }
 AssetManager <- Entity
 @enduml

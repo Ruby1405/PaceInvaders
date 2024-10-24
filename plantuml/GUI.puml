@@ -3,6 +3,17 @@ class GUI <<sealed>> {
     - menuSelection : int
     - font : Font {readOnly}
     - ui : Text {readOnly}
+    - text : Text {readOnly}
+    - option_position : Vector2f {readOnly}
+    - {static} MENU_OPTIONS : string[] {readOnly}
+    - {static} PAUSE_OPTIONS : string[] {readOnly}
+    - highScores : List<(int, string)>
+    - {static} HIGHSCORES_PATH : string
+    - {static} HIGHSCORES_DISPLAY_COUNT : int
+    - playerRank : int
+    - returnState : State
+    - OnGameLost() : void
+    + LoadHighScores() : void
     + Update() : void
     + Render(window:RenderWindow) : void
 }

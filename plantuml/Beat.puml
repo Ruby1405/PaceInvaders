@@ -1,8 +1,0 @@
-@startuml
-class Beat <<sealed>> {
-    + Beat()
-    + <<override>> Create() : void
-    + <<override>> Update(deltaTime:float) : void
-}
-Entity <|-- Beat
-@enduml

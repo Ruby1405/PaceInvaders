@@ -14,8 +14,9 @@ struct Difficulty {
 class Scene <<sealed>> {
     + {static} WIDTH : int
     + {static} HEIGHT : int
-    - gui : GUI {readOnly}
-    + rythm : RythmManager {readOnly}
+    - {static} gui : GUI {readOnly}
+    + {static} rythm : RythmManager {readOnly}
+    - {static} explosionBuffer : List<Explosion>
     - difficulty : Difficulty
     - {static} SCORE_TIME : float
     - {static} scoreTimer : float
@@ -24,10 +25,12 @@ class Scene <<sealed>> {
     + {static} {method} Score : Int
     + {static} {method} Health : Int
     + Scene(window:RenderWindow)
+    + NewGame() : void
     + Spawn(entity:Entity) : void
     - OnDecreaseHealth(health : int) : void
     - OnBeat() : void
     - OnFireBullet(source : Entity, damage : float) : void
+    - OnExplosion(p : Vector2f, v : Vector2f) : void
     + Update(scene:Scene, deltaTime:float) : void
     + Render(window:RenderWindow) : void
 }

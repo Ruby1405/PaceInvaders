@@ -28,7 +28,6 @@ public static class InputManager {
                 Keyboard.Key.Enter // SUBMIT
             ];
     private static string inputString = "";
-    private static UserActions bindToBeChanged;
     private static RenderWindow window;
     public static void InitializeInputs(RenderWindow w) {
         if (File.Exists(KEYBINDINGS_PATH)) inputKeys = LoadKeyBindings() ?? inputKeys;
@@ -78,17 +77,6 @@ public static class InputManager {
     public static string GetInputString() => inputString;
     private static void SaveKeyBindings() => 
         File.WriteAllText(KEYBINDINGS_PATH, JsonSerializer.Serialize(inputKeys));
-    public static void ChangeKeyBind(UserActions action)
-    {
-        bindToBeChanged = action;
-        window.KeyPressed += OnKeySetBind;
-    }
-    private static void OnKeySetBind(object? _, KeyEventArgs e) 
-    {
-        inputKeys[(int)bindToBeChanged] = e.Code;
-        window.KeyPressed -= OnKeySetBind;
-        SaveKeyBindings();
-    }
     private static Keyboard.Key[]? LoadKeyBindings() =>
         JsonSerializer.Deserialize<Keyboard.Key[]>(File.ReadAllText(KEYBINDINGS_PATH));
 }

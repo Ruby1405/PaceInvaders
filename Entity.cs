@@ -6,7 +6,6 @@ namespace PaceInvaders;
 public abstract class Entity {
     private string textureName;
     protected Sprite sprite;
-    //protected CircleShape sprite;
     protected Vector2f velocity;
     public bool Dead { get; private set;}
     public Entity(string textureName) {

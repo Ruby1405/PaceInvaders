@@ -1,8 +1,11 @@
 @startuml
 class RythmManager <<sealed>> {
-    - songTime : Clock
+    - beatTimer : float
+    - music : Music
     - {static} MAX_BEAT_TIME : float
     + Update(deltaTime : float) : void
+    + Pause() : void
+    + Play() : void
 }
 InputManager <-- RythmManager
 UserActions <-- RythmManager
