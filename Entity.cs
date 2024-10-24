@@ -5,17 +5,16 @@ namespace PaceInvaders;
 
 public abstract class Entity {
     private string textureName;
-    //protected Sprite sprite;
-    protected CircleShape sprite;
+    protected Sprite sprite;
+    //protected CircleShape sprite;
     protected Vector2f velocity;
     public bool Dead { get; private set;}
     public Entity(string textureName) {
         this.textureName = textureName;
-        //sprite = new();
-        sprite = new(10)
+        sprite = new()
         {
-            Origin = new Vector2f(10f, 10f),
-            FillColor = Color.White
+            Origin = new (32f, 32f),
+            Scale = new(0.5f,0.5f)
         };
         velocity = new Vector2f(0, 0);
     }
@@ -26,7 +25,7 @@ public abstract class Entity {
     }
     public virtual FloatRect Bounds => sprite.GetGlobalBounds();
     public virtual void Create() {
-        //sprite.Texture = AssetManager.LoadTexture(textureName);
+        sprite.Texture = AssetManager.LoadTexture(textureName);
     }
     public virtual void Destroy() {
         Dead = true;

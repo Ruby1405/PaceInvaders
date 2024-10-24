@@ -64,35 +64,17 @@ sealed class Enemy : Entity {
                 if (health <= 0)
                 {
                     Destroy();
-                    // Modifies entities collection
-                    //EventManager.PublishExplosion(Position,velocity);
+                    EventManager.PublishExplosion(Position,velocity);
                     break;
                 }
             }
         }
-        /*for (int i = 0; i < Scene.Entities.Count; i++)
-        {
-            if (Scene.Entities[i] is Bullet)
-            {
-                Bullet bullet = Scene.Entities[i] as Bullet;
-                if (bullet.good && !bullet.Dead && (bullet.Position - Position).Length() < 20)
-                {
-                    bullet.Destroy();
-                    health -= bullet.damage;
-                    if (health <= 0)
-                    {
-                        Destroy();
-                        EventManager.PublishExplosion(Position,velocity);
-                        break;
-                    }
-                }
-            }
-        }*/
         // FIX
         // FIX
         if ((Scene.Entities.Find(e => e is Player).Position - Position).Length() < 20)
         {
             Destroy();
+            EventManager.PublishExplosion(Position,velocity);
         }
     }
 }

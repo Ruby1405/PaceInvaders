@@ -21,10 +21,10 @@ sealed class Player : Entity {
     }
     public Player() : base("player")
     {
-        sprite.FillColor = Color.Green;
+        //sprite.FillColor = Color.Green;
         guns = [
-            new Vector2f(-10, -5),
-            new Vector2f(10, -5)
+            new Vector2f(-15, -4),
+            new Vector2f(15, -4)
         ];
     }
     public override void Create()

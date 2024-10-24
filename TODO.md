@@ -21,9 +21,9 @@
     - [x] Player gets score for each second that they stay alive
     - [x] Score is displayed on screen
     - [x] Is reset when the game is lost
-- [ ] Explosions
-    - [ ] Enemy ship explodes when damaged
-    - [ ] Colliding with explosions does not affect any ships or bullets
+- [x] Explosions
+    - [x] Enemy ship explodes when damaged
+    - [x] Colliding with explosions does not affect any ships or bullets
 - [x] Health
     - [x] Players health is displayed on screen
     - [x] Player loses health when taking damage
@@ -49,3 +49,7 @@
 spawn enemies only on some beats
 player bullets deal more damage the closer they are to beat
 3d from a "45" degree angle
+
+- [ ] UI input tips
+- [ ] use submit or space
+- [ ] fix collision

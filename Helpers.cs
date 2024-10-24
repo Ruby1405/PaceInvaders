@@ -27,11 +27,5 @@ public static class Helpers {
     /// <param name="b"></param>
     /// <returns></returns>
     public static Vector2f HadamardProduct(Vector2f a, Vector2f b) =>
-        new Vector2f(a.X * b.X, a.Y * b.Y);
-    //public static bool PointToRectCollision(Vector2f p, FloatRect r)
-    //{
-    //    if (
-    //        p.X > 
-    //        )
-    //}
+        new (a.X * b.X, a.Y * b.Y);
 }

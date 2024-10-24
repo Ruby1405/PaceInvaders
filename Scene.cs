@@ -18,6 +18,7 @@ public sealed class Scene
     private static float scoreTimer = SCORE_TIME;
     private static readonly GUI gui = new();
     public static readonly RythmManager rythm = new();
+    private static List<Explosion> explosionBuffer = [];
     public static State State { get; set; }
     public static List<Entity> Entities { get; private set; } = [];
     public static int Score { get; private set; }
@@ -39,7 +40,7 @@ public sealed class Scene
         EventManager.FireBullet += OnFireBullet;
         EventManager.DecreaseHealth += OnDecreaseHealth;
         EventManager.Beat += OnBeat;
-        //EventManager.Explosion += OnExplosion;
+        EventManager.Explosion += OnExplosion;
 
         NewGame();
     }
@@ -117,19 +118,24 @@ public sealed class Scene
             });
         }
     }
-    /*private void OnExplosion(Vector2f p, Vector2f v)
+    private void OnExplosion(Vector2f p, Vector2f v)
     {
-        Spawn(new Explosion()
+        explosionBuffer.Add(new Explosion()
         {
             Position = p,
             Velocity = v
         });
-    }*/
+    }
     public void Update(float deltaTime) {
         switch (State)
         {
             case State.PLAY:
                 rythm.Update(deltaTime);
+                while (explosionBuffer.Count > 0)
+                {
+                    Spawn(explosionBuffer[0]);
+                    explosionBuffer.RemoveAt(0);
+                }
                 foreach (Entity entity in Entities) entity.Move(deltaTime);
                 foreach (Entity entity in Entities) entity.Update(deltaTime);
                 for (int i = 0; i < Entities.Count;)

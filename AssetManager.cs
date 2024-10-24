@@ -1,8 +1,6 @@
 using SFML.Audio;
 using SFML.Graphics;
-
 namespace PaceInvaders;
-
 public static class AssetManager {
     private const string ASSET_PATH = "Assets/";
     private static readonly Dictionary<string, Texture> textures = [];
@@ -10,7 +8,8 @@ public static class AssetManager {
     private static readonly Dictionary<string, Music> musics = [];
     private static readonly Dictionary<string, SoundBuffer> soundBuffers = [];
     public static Texture LoadTexture(string filename) {
-        Texture texture = new(filename);
+        if (textures.TryGetValue(filename, out Texture found)) return found;
+        Texture texture = new($"{ASSET_PATH}{filename}.png");
         textures.Add(filename, texture);
         return texture;
     }
