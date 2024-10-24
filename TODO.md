@@ -28,9 +28,9 @@
     - [x] Players health is displayed on screen
     - [x] Player loses health when taking damage
     - [x] When health == 0, the game is lost. (You shouldn't need to restart the game executable to play again.)
-- [ ] Graphics
-    - [ ] All of the above game elements have a functional graphical representation
-    - [ ] Both textures and Fonts are used
+- [x] Graphics
+    - [x] All of the above game elements have a functional graphical representation
+    - [x] Both textures and Fonts are used
 - [x] Optimization
     - [x] The player should theoretically be able to play “forever” without the game breaking
             hint: clear bullets from memory when they exit the screen
@@ -53,3 +53,4 @@ player bullets deal more damage the closer they are to beat
 - [ ] UI input tips
 - [ ] use submit or space
 - [ ] fix collision
+- [ ] fix bouncing

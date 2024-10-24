@@ -1,5 +1,6 @@
 using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 
 namespace PaceInvaders;
 
@@ -23,8 +24,8 @@ sealed class Player : Entity {
     {
         //sprite.FillColor = Color.Green;
         guns = [
-            new Vector2f(-15, -4),
-            new Vector2f(15, -4)
+            new Vector2f(-15, -20),
+            new Vector2f(15, -20)
         ];
     }
     public override void Create()
@@ -76,32 +77,28 @@ sealed class Player : Entity {
     public override void Update(float deltaTime)
     {
         if (grace > 0) grace -= deltaTime;
-
-        if (grace <= 0)
+        if (grace > 0) return;
+        
+        // if collided with enemy bullet
+        foreach (var bullet in Scene.Entities.OfType<Bullet>().Where(b => !b.good && !b.Dead))
         {
-            // if collided with enemy or enemy bullet
-            foreach (var bullet in Scene.Entities.OfType<Bullet>().Where(b => !b.good && !b.Dead))
-            {
-                // FIX
-                if ((bullet.Position - Position).Length() < 20)
-                {
-                    bullet.Destroy();
-                    EventManager.PublishDecreaseHealth(1);
-                    grace = MAX_GRACE;
-                    break;
-                }
-            }
-            if (grace <= 0) foreach (var enemy in Scene.Entities.OfType<Enemy>().Where(e => !e.Dead))
-            {
-                // FIX
-                if ((enemy.Position - Position).Length() < 20)
-                {
-                    enemy.Destroy();
-                    EventManager.PublishDecreaseHealth(1);
-                    grace = MAX_GRACE;
-                    break;
-                }
-            }
+            if (!Helpers.PointToRectCollision(bullet.Position,Bounds)) continue;
+            bullet.Destroy();
+            EventManager.PublishDecreaseHealth(1);
+            grace = MAX_GRACE;
+            break;
+        }
+        if (grace > 0) return;
+        
+        // if collided with enemy
+        foreach (var enemy in Scene.Entities.OfType<Enemy>().Where(e => !e.Dead))
+        {
+            if (!Helpers.RectToRectCollision(Bounds,enemy.Bounds)) continue;
+            enemy.Destroy();
+            EventManager.PublishDecreaseHealth(1);
+            EventManager.PublishExplosion(enemy.Position,enemy.Velocity);
+            grace = MAX_GRACE;
+            break;
         }
     }
 }

@@ -7,6 +7,7 @@ sealed class Enemy : Entity {
     private float health = 100;
     private const float MAX_SPEED = 100;
     private static readonly Random rng = new();
+    public Vector2f Velocity => velocity;
     public Enemy() : base("enemy") {
     }
     public override void Create()
@@ -53,11 +54,9 @@ sealed class Enemy : Entity {
     public override void Update(float deltaTime)
     {
         // If collided with player bullet
-        // EventManager.PublishEnemyKilled();
         foreach (var bullet in Scene.Entities.OfType<Bullet>().Where(bullet => bullet.good && !bullet.Dead))
         {
-            // FIX
-            if ((bullet.Position - Position).Length() < 20)
+            if (Helpers.PointToRectCollision(bullet.Position,Bounds))
             {
                 bullet.Destroy();
                 health -= bullet.damage;

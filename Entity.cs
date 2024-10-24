@@ -13,8 +13,7 @@ public abstract class Entity {
         this.textureName = textureName;
         sprite = new()
         {
-            Origin = new (32f, 32f),
-            Scale = new(0.5f,0.5f)
+            Origin = new (16f, 16f)
         };
         velocity = new Vector2f(0, 0);
     }
