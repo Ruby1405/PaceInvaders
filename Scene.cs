@@ -50,6 +50,7 @@ public sealed class Scene
             entity.Destroy();
         }
         Entities.Clear();
+        explosionBuffer.Clear();
 
         Player player = new()
         {

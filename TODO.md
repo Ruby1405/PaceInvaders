@@ -52,5 +52,3 @@ player bullets deal more damage the closer they are to beat
 
 - [ ] UI input tips
 - [ ] use submit or space
-- [ ] fix collision
-- [ ] fix bouncing

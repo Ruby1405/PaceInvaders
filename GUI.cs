@@ -22,11 +22,11 @@ sealed class GUI {
         "Main menu"
     ];
     private bool showHighScores = false;
-    private bool enteringName = false;
     private List<(int, string)> highScores = [];
     private const string HIGHSCORES_PATH = "Config/highscores.txt";
     private const int HIGHSCORES_DISPLAY_COUNT = 20;
     private int playerRank;
+    private State returnState;
     public GUI() {
         font = new Font("Assets/pixel-font.ttf");
 
@@ -47,7 +47,6 @@ sealed class GUI {
     private void OnGameLost()
     {
         InputManager.StartTextInput();
-        enteringName = true;
         LoadHighScores();
         if (highScores.Count == 0)
         {
@@ -110,11 +109,15 @@ sealed class GUI {
                             Scene.State = State.PLAY;
                             break;
                         case "Highscores":
+                            returnState = Scene.State;
                             Scene.State = State.HIGHSCORES;
                             LoadHighScores();
                             optionSelection = 0;
                             break;
                         case "Settings":
+                            returnState = Scene.State;
+                            Scene.State = State.HIGHSCORES;
+                            optionSelection = 0;
                             break;
                         case "Quit":
                             Scene.State = State.QUIT;
@@ -137,23 +140,23 @@ sealed class GUI {
                     if (InputManager.InstantInputs[(int)UserActions.MOVE_UP] &&
                         optionSelection != 0) optionSelection --;
                 }
-                if (InputManager.InstantInputs[(int)UserActions.PAUSE]) Scene.State = State.MENU;
+                if (InputManager.InstantInputs[(int)UserActions.PAUSE]) Scene.State = returnState;
                 break;
             case State.GAME_OVER:
-                if (InputManager.InstantInputs[(int)UserActions.SUBMIT] && enteringName)
-                {
-                    InputManager.EndTextInput();
-                    enteringName = false;
-                    (int, string) entry = new(Scene.Score, InputManager.GetInputString());
-                    if (entry.Item2 == "") entry.Item2 = " ";
-                    if (playerRank == highScores.Count) highScores.Add(entry);
-                    else highScores.Insert(playerRank, entry);
-                    if (highScores.Count > 100) highScores.RemoveRange(100, highScores.Count -100);
-                    string fileString = "";
-                    highScores.ForEach(e => fileString += $"{e.Item1}:{e.Item2}\n");
-                    File.WriteAllText(HIGHSCORES_PATH, fileString);
-                }
-                if (InputManager.InstantInputs[(int)UserActions.PAUSE]) Scene.State = State.HIGHSCORES;
+                if (!InputManager.InstantInputs[(int)UserActions.SUBMIT] &&
+                    !InputManager.InstantInputs[(int)UserActions.PAUSE])
+                    break;
+                InputManager.EndTextInput();
+                (int, string) entry = new(Scene.Score, InputManager.GetInputString());
+                if (entry.Item2 == "") entry.Item2 = " ";
+                if (playerRank == highScores.Count) highScores.Add(entry);
+                else highScores.Insert(playerRank, entry);
+                if (highScores.Count > 100) highScores.RemoveRange(100, highScores.Count -100);
+                string fileString = "";
+                highScores.ForEach(e => fileString += $"{e.Item1}:{e.Item2}\n");
+                File.WriteAllText(HIGHSCORES_PATH, fileString);
+                returnState = State.MENU;
+                Scene.State = State.HIGHSCORES;
                 break;
         }
     }
