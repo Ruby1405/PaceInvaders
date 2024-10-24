@@ -12,8 +12,8 @@ public enum State {
 }
 public sealed class Scene
 {
-    public const int WIDTH = 828;
-    public const int HEIGHT = 900;
+    public const int WIDTH = 720;
+    public const int HEIGHT = 960;
     private const float SCORE_TIME = 1f;
     private static float scoreTimer = SCORE_TIME;
     private static readonly GUI gui = new();

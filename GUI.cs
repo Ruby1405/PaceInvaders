@@ -98,7 +98,7 @@ sealed class GUI {
 
                 if (InputManager.InstantInputs[(int)UserActions.PAUSE] && Scene.State == State.PAUSE) Scene.State = State.PLAY;
 
-                if (InputManager.InstantInputs[(int)UserActions.SHOOT])
+                if (InputManager.InstantInputs[(int)UserActions.SHOOT] || InputManager.InstantInputs[(int)UserActions.SUBMIT])
                     switch (options[optionSelection])
                     {
                         case "New Game":
@@ -175,6 +175,18 @@ sealed class GUI {
                     text.Position = OPTION_POSITION + new Vector2f(0,i * (text.CharacterSize + 20));
                     text.FillColor = optionSelection == i? Color.Cyan : Color.White;
                     window.Draw(text);
+                    text.DisplayedString = "Select: " + InputManager.GetKey(UserActions.SHOOT) +
+                                           " / " + InputManager.GetKey(UserActions.SUBMIT);
+                    text.FillColor = Color.Yellow;
+                    text.Position = new Vector2f(50,Scene.HEIGHT - (10 + text.CharacterSize));
+                    window.Draw(text);
+                    if (Scene.State == State.PAUSE)
+                    {
+                        text.DisplayedString = $"Resume: {InputManager.GetKey(UserActions.PAUSE)}";
+                        text.FillColor = Color.Yellow;
+                        text.Position = new Vector2f(50,Scene.HEIGHT - 2 * (10 + text.CharacterSize));
+                        window.Draw(text);
+                    }
                 }
                 break;
             case State.HIGHSCORES:
@@ -184,6 +196,14 @@ sealed class GUI {
                         optionSelection].Item1} {highScores[i + optionSelection].Item2}";
                     text.Position = new Vector2f(50,20 + i * (text.CharacterSize + 10));
                     text.FillColor = Color.White;
+                    window.Draw(text);
+                    text.DisplayedString = $"Scroll: {InputManager.GetKey(UserActions.MOVE_DOWN)} & {InputManager.GetKey(UserActions.MOVE_UP)}";
+                    text.FillColor = Color.Yellow;
+                    text.Position = new Vector2f(50,Scene.HEIGHT - 2 * (10 + text.CharacterSize));
+                    window.Draw(text);
+                    text.DisplayedString = $"Close highscores: {InputManager.GetKey(UserActions.PAUSE)}";
+                    text.FillColor = Color.Yellow;
+                    text.Position = new Vector2f(50,Scene.HEIGHT - (10 + text.CharacterSize));
                     window.Draw(text);
                 }
                 break;
@@ -203,14 +223,12 @@ sealed class GUI {
                 text.DisplayedString = $"Enter a name: {InputManager.GetInputString()}";
                 text.Position = new Vector2f(50,340);
                 window.Draw(text);
-
-                // TODO go back to main menu or highscore
+                text.DisplayedString = $"Highscores: {InputManager.GetKey(UserActions.SUBMIT)} / {InputManager.GetKey(UserActions.PAUSE)}";
+                text.FillColor = Color.Yellow;
+                text.Position = new Vector2f(50,Scene.HEIGHT - (10 + text.CharacterSize));
+                window.Draw(text);
                 break;
 
         }
-    }
-    public void GetHighScore()
-    {
-        //File.ReadLines
     }
 }

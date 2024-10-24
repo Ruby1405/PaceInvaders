@@ -56,10 +56,7 @@ public static class InputManager {
     public static void Update() {
         for (int i = 0; i < InstantInputs.Length; i++) InstantInputs[i] = false;
     }
-    public static Keyboard.Key? GetKey(UserActions action) {
-        if (inputKeys == null) return null;
-        return inputKeys[(int)action];
-    }
+    public static string GetKey(UserActions action) => inputKeys[(int)action].ToString();
     private static void RecordTextInput(object? _, TextEventArgs e)
     {
         if (e.Unicode == "\b")
